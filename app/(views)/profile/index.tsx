@@ -1,3 +1,3 @@
 export default function ProfileScreen() {
-    return "Profile Screen";
+  return "Profile Screen";
 }

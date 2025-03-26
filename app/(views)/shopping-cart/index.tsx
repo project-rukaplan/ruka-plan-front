@@ -1,3 +1,3 @@
 export default function ShoppingCartScreen() {
-    return "Shopping cart screen";
+  return "Shopping cart screen";
 }
