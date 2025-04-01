@@ -20,7 +20,7 @@ export default function ProfileScreen() {
 
       <SafeAreaView>
         <h3>Proyectos actuales:</h3>
-        <ProjectGroupPreview />
+        <ProjectGroupPreview orientation="horizontal"/>
       </SafeAreaView>
     </SafeAreaProvider>
   );

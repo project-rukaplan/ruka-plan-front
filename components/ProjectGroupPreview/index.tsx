@@ -2,7 +2,11 @@ import { StyleSheet } from "react-native";
 import { ProjectProps } from "../ProjectPreview/interfaces";
 import ProjectPreview from "../ProjectPreview";
 
-export default function ProjectGroupPreview() {
+export default function ProjectGroupPreview({
+  orientation = "vertical",
+}: {
+  orientation?: "vertical" | "horizontal";
+}) {
   // Esto viene de una llamada al backend
   const currentProjects: ProjectProps[] = [
     {
@@ -33,6 +37,13 @@ export default function ProjectGroupPreview() {
     },
   ];
 
+  const styles = StyleSheet.create({
+    container: {
+      display: "flex",
+      flexDirection: orientation === "vertical" ? "column" : "row",
+    },
+  });
+
   return (
     <div style={styles.container}>
       {currentProjects.map((project: ProjectProps) => (
@@ -41,10 +52,3 @@ export default function ProjectGroupPreview() {
     </div>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-  },
-});
