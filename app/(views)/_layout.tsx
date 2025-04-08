@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { Platform } from "react-native";
+import { Platform, Image } from "react-native";
 
 export default function ViewsLayout() {
   return (
@@ -10,6 +10,12 @@ export default function ViewsLayout() {
         tabBarPosition: Platform.OS === "web" ? "top" : "bottom",
         tabBarStyle: {
           height: 50,
+          backgroundColor: "#B99470",
+        },
+        tabBarLabelStyle: {
+          fontSize: 23,
+          fontWeight: "bold",
+          color: "#F7DCB9",
         },
       }}
     >
@@ -20,6 +26,8 @@ export default function ViewsLayout() {
           tabBarIcon: () => <></>,
           tabBarItemStyle: {
             flex: 1,
+            alignItems: "flex-start",
+            paddingLeft: 2, 
           },
         }}
       />
@@ -30,6 +38,8 @@ export default function ViewsLayout() {
           tabBarIcon: () => <></>,
           tabBarItemStyle: {
             flex: 1,
+            alignItems: "flex-start",
+            paddingLeft: 2 
           },
         }}
       />
@@ -37,9 +47,14 @@ export default function ViewsLayout() {
         name={"shopping-cart/index"}
         options={{
           title: "",
-          //   tabBarIcon: () => (<></>),
+          tabBarIcon: () => (
+            <Image 
+              source={require("../../assets/images/carrito.png")} 
+              style={{ width: 30, height: 30, marginRight: 20 }} 
+            />
+          ),
           tabBarItemStyle: {
-            flex: 6,
+            flex: 0.5,
             justifyContent: "flex-end",
             alignItems: "flex-end",
           },
