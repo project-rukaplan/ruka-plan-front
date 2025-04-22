@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
+    "start:test": "EXPO_PUBLIC_ENV=test expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "prettier": "prettier --write .",
     "android": "expo start --android",
