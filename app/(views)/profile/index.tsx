@@ -2,9 +2,12 @@ import { Avatar } from "react-native-paper";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+// eslint-disable-next-line import/no-unresolved
 import ProjectGroupPreview from "@/components/ProjectGroupPreview";
+import { UseStore } from "../../../context";
 
 export default function ProfileScreen() {
+  const { store } = UseStore();
   return (
     <SafeAreaProvider>
       <View style={styles.full_background}>
@@ -12,15 +15,20 @@ export default function ProfileScreen() {
           <div style={styles.user_info}>
             <Avatar.Icon size={240} icon={"account"} />
             <div style={{ marginLeft: 40 }}>
-              <p>Nombre de usuario: </p>
-              <p>Correo del usuario: </p>
+              <p>
+                Nombre de usuario: {store.user.user_name}{" "}
+                {store.user.user_lastname}
+              </p>
+              <p>Correo del usuario: {store.user.user_email} </p>
             </div>
           </div>
         </SafeAreaView>
 
         <SafeAreaView style={styles.projects_section_background}>
           <View style={styles.projects_container}>
-            <h3 style={{ fontSize: 37, marginBottom: 60 }}>Proyectos actuales:</h3> {}
+            <h3 style={{ fontSize: 37, marginBottom: 60 }}>
+              Proyectos actuales:
+            </h3>
             <ProjectGroupPreview orientation="horizontal" />
           </View>
         </SafeAreaView>
