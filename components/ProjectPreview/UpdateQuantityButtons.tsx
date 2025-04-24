@@ -8,7 +8,7 @@ export default function UpdateQuantityButtons({
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <button>+</button>
-      <p>{product.product_quantity}</p>
+      <p>{product.quantity}</p>
       <button>-</button>
     </div>
   );

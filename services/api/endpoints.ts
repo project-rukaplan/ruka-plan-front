@@ -14,4 +14,7 @@ export const endpoints = {
   sections: {
     all_sections: "/sections",
   },
+  projects: {
+    with_products: "/projects/with-products"
+  }
 };

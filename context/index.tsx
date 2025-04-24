@@ -5,6 +5,13 @@ import { StoreReducer } from "./reducer";
 
 const InitialStore: IStore = {
   loading: false,
+  // Mock data, this should come from backend
+  user: {
+    user_id: 1,
+    user_name: "Pepito",
+    user_lastname: "Perez",
+    user_email: "pepitoperez@gmail.com",
+  },
 };
 
 export const StorageContext = React.createContext<{
