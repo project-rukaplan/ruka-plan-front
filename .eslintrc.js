@@ -1,7 +1,7 @@
 // https://docs.expo.dev/guides/using-eslint/
 module.exports = {
-  extends: ["expo", "prettier", "plugin:import/typescript"],
-  plugins: ["prettier", "unused-imports"],
+  extends: ["expo", "prettier", "plugin:import/typescript", "react-hooks"],
+  plugins: ["prettier", "unused-imports", "react-hooks", "react"],
   ignorePatterns: ["/dist/*"],
   rules: {
     "unused-imports/no-unused-imports": "error",
