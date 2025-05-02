@@ -32,6 +32,28 @@ export default class ApiHandler {
     }
   }
 
+  public async put({ endpoint, body }: RequestBody) {
+    try {
+      const url: URL = new URL(this.getApiURL() + endpoint);
+      const headers: Headers = this.getHeaders();
+
+      const requestSettings: RequestInit = {
+        method: HttpMethods.PUT as string,
+        body: JSON.stringify(body),
+        headers,
+      };
+
+      const response: any = await this.fetchRequest(
+        url.toString(),
+        requestSettings,
+      );
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   private getApiURL(): string {
     try {
       const currentEnv: string = process.env.EXPO_PUBLIC_ENV ?? "test";
@@ -48,7 +70,7 @@ export default class ApiHandler {
   private getHeaders(): Headers {
     try {
       const headers: Headers = new Headers();
-      headers.append("Content-Type", "application/json");
+      headers.append("content-type", "application/json");
       return headers;
     } catch (error) {
       throw new Error(`Error defining the headers: ${error}`);

@@ -16,9 +16,13 @@ import { UseStore } from "../../../context";
 import { StoreActions } from "../../../context/types";
 import { getAllSections } from "../../../services/sections.service";
 import { SectionProps } from "../../../interfaces/sections/section.interface";
+import ProductsInSectionView from "@/components/ProductsInSectionView";
 
 export default function HomeScreen() {
   const [searchText, setSearchText] = useState<string>();
+  const [sectionSelected, setSectionSelected] = useState<number | undefined>(
+    undefined,
+  );
   const { store, dispatch } = UseStore();
 
   const SectionsImagesMap: { [key: number]: string } = {
@@ -79,6 +83,7 @@ export default function HomeScreen() {
               <TouchableOpacity
                 key={section.section_id}
                 style={styles.sectionButton}
+                onPress={() => setSectionSelected(section.section_id)}
               >
                 <Image source={section.image} style={styles.sectionImage} />
                 <Text style={styles.sectionText}>{section.section_name}</Text>
@@ -86,6 +91,9 @@ export default function HomeScreen() {
             );
           })}
         </View>
+        {sectionSelected ? (
+          <ProductsInSectionView section_id={sectionSelected} />
+        ) : null}
       </SafeAreaView>
     </SafeAreaProvider>
   );

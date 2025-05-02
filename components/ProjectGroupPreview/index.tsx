@@ -45,7 +45,7 @@ export default function ProjectGroupPreview({
   return (
     <div style={styles.container}>
       {projects.map((project: ProjectProps) => (
-        <ProjectPreview key={project.project_id} {...project} />
+        <ProjectPreview key={project.project_id} {...project} reloadProject={getUserProjects}/>
       ))}
     </div>
   );

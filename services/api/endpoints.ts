@@ -15,6 +15,10 @@ export const endpoints = {
     all_sections: "/sections",
   },
   projects: {
-    with_products: "/projects/with-products"
+    with_products: "/projects/with-products",
+    update_product_quantity: "/products/projects/update-quantity",
+  },
+  products: {
+    by_section: "/products/by-section"
   }
 };
