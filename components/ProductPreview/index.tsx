@@ -1,21 +1,49 @@
-import { StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
+import { Divider } from "@rneui/themed";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 import { ProductProps } from "../../interfaces/products/product.interface";
 import { formatPrice } from "../../utils/formatters/formatPrice";
+import CustomRatingGroup from "../CustomRatingGroup";
 
 export default function ProductPreview({
+  product_id,
   product_name,
   product_description,
   product_price,
+  product_cost_rating,
+  product_quality_rating,
+  product_shipment_rating,
 }: ProductProps) {
+  const router = useRouter();
+
+  const navigateToProductDetail = () => {
+    router.navigate(`/(views)/products/${product_id}`);
+  };
+
   return (
-    <div style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={navigateToProductDetail}
+    >
       <div style={styles.titleContainer}>
-        <h3>{product_name}</h3>
+        <Text style={{ ...styles.mainTitleStyle, fontSize: 20 }}>
+          {product_name}
+        </Text>
       </div>
-      <h4>{product_description}</h4>
-      <h4>Precio: {formatPrice(product_price)}</h4>
-    </div>
+      <Text style={{ fontSize: 15 }}>{product_description}</Text>
+
+      <Divider />
+      <CustomRatingGroup
+        cost={product_cost_rating!}
+        quality={product_quality_rating!}
+        shipment={product_shipment_rating!}
+      />
+      <Divider />
+      <Text style={styles.mainTitleStyle}>
+        Precio unitario: {formatPrice(product_price)}
+      </Text>
+    </TouchableOpacity>
   );
 }
 
@@ -27,12 +55,18 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     margin: 15,
     padding: 15,
+    gap: 15,
   },
   titleContainer: {
+    fontSize: 20,
+    fontWeight: "bold",
     backgroundColor: "#b4c18d",
     borderRadius: 15,
-    height: 50,
-    textAlign: "left",
-    padding: 15,
+    textAlign: "center",
+    padding: 10,
+  },
+  mainTitleStyle: {
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
