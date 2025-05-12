@@ -64,11 +64,9 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    borderColor: "black",
-    borderStyle: "solid",
     margin: 10,
     padding: 10,
-    backgroundColor: "#d1d3c9",
+    backgroundColor: "#F7DCB9",
   },
   buttonsContainer: {
     display: "flex",
