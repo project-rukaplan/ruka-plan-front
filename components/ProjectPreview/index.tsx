@@ -52,6 +52,6 @@ const styles = {
     lineHeight: "50px", 
     fontSize: "27px",
     fontWeight: "bold", 
-    color: "#FFFFFF",
+    fontColor: "#FFFFFF",
 },
-};
+}
