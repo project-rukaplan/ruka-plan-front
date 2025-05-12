@@ -17,7 +17,7 @@ export default function ShoppingCartScreen() {
 
 const styles = StyleSheet.create({
   mainContainer: { display: "flex", flexDirection: "row",   backgroundColor: "#F7DCB9", padding: 40,  minHeight: "100vh", width: "100vw",},
-  buttonContainer: { display: "flex", flexDirection: "column",  backgroundColor: "#F7DCB9",  color },
+  buttonContainer: { display: "flex", flexDirection: "column",  backgroundColor: "#F7DCB9",  },
 
 
 });
