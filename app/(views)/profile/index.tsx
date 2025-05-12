@@ -26,7 +26,7 @@ export default function ProfileScreen() {
 
         <SafeAreaView style={styles.projects_section_background}>
           <View style={styles.projects_container}>
-            <h3 style={{ fontSize: 37, marginBottom: 60 }}>
+            <h3 style={{ fontSize: 47, marginBottom: 60, color: "#B99470", fontWeight: "bold" }}>
               Proyectos actuales:
             </h3>
             <ProjectGroupPreview orientation="horizontal" />

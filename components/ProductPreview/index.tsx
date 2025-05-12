@@ -23,16 +23,17 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#d1d3c9",
+    backgroundColor: "#B5C18E",
     borderRadius: 15,
     margin: 15,
     padding: 15,
   },
   titleContainer: {
-    backgroundColor: "#b4c18d",
+    backgroundColor: "#B99470",
     borderRadius: 15,
     height: 50,
     textAlign: "left",
     padding: 15,
+    color: "#FFFFFF",
   },
 });
