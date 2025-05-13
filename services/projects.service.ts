@@ -41,7 +41,7 @@ export const updateProjectProductQuantity = async (
   }
 };
 
-export const createProject = async (user_id: number, project_name: string) => {
+export const createProject = async (user_id: number, project_name: string, project_description: string) => {
   try {
     const apiHandler = new ApiHandler();
     const endpoint: string = endpoints.projects.create_project;
@@ -49,6 +49,7 @@ export const createProject = async (user_id: number, project_name: string) => {
     const body = {
       user_id,
       project_name,
+      project_description
     };
 
     const response = await apiHandler.post({ endpoint, body });

@@ -10,6 +10,7 @@ export default function ProjectPreview({
   project_name,
   products,
   project_id,
+  project_description,
 }: ProjectProps) {
   const [projectTotalCost, setProjectTotalCost] = useState<number>(0);
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function ProjectPreview({
       onPress={navigateToProjectDetail}
     >
       <Text style={styles.headerContainer}>{project_name}</Text>
+      <Text style={styles.subtitleContainer}>{project_description}</Text>
       <Text
         style={{ ...styles.headerContainer, backgroundColor: "transparent" }}
       >
@@ -62,5 +64,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     padding: 15,
     fontSize: 20,
+  },
+  subtitleContainer: {
+    backgroundColor: "transparent",
+    fontWeight: "500",
+    marginHorizontal: 30,
+    marginTop: -15,
+    marginBottom: 15,
+    textAlign: "center",
+    padding: 10,
+    fontSize: 16,
+    color: "#4a4a4a",
+    fontStyle: "italic",
   },
 });

@@ -48,6 +48,9 @@ export default function ProjectDetail() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{project.project_name}</Text>
+      <Text style={styles.subtitle}>
+        {project.project_description ?? "descripcion del proyecto"}
+      </Text>
       <Text style={styles.totalCost}>
         Costo total del proyecto: {formatPrice(totalProjectCost)}
       </Text>
@@ -124,5 +127,14 @@ const styles = StyleSheet.create({
     color: "#666666",
     width: "100%",
     marginTop: 10,
+  },
+  subtitle: {
+    fontSize: Dimensions.get("window").width < 768 ? 16 : 20,
+    fontWeight: "500",
+    marginTop: -15,
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#4a4a4a",
+    fontStyle: "italic",
   },
 });
