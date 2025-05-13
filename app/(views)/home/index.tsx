@@ -121,9 +121,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   sectionImage: {
-    width: 130,
-    height: 130,
+    width: 200,
+    height: 200,
     marginBottom: 5,
+    
   },
   sectionText: {
     fontSize: 22,

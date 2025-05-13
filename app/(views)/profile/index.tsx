@@ -39,7 +39,7 @@ export default function ProfileScreen() {
               <CreateProjectButton style={{ marginBottom: 30 }} />
             </div>
             <Text
-              style={{ fontSize: 37, marginBottom: 60, fontWeight: "bold" }}
+              style={{ fontSize: 47, marginBottom: 60, color: "#B99470", fontWeight: "bold"  }}
             >
               Proyectos actuales:
             </Text>

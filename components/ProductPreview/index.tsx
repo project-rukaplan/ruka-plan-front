@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#d1d3c9",
+    backgroundColor: "#B5C18E",
     borderRadius: 15,
     margin: 15,
     padding: 15,
@@ -68,5 +68,11 @@ const styles = StyleSheet.create({
   mainTitleStyle: {
     fontSize: 16,
     fontWeight: "bold",
+    backgroundColor: "#B99470",
+    borderRadius: 15,
+    height: 50,
+    textAlign: "left",
+    padding: 15,
+    color: "#FFFFFF",
   },
 });
