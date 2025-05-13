@@ -1,4 +1,4 @@
-import { ProjectProps } from "@/components/ProjectPreview/interfaces";
+import { ProjectProps } from "../interfaces/projects/projects.interface";
 import { UserProps } from "../interfaces/user/user.interface";
 
 export interface IStore {

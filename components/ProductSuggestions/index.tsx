@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  FlatList,
-  View,
-  Text,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, FlatList, View, Text } from "react-native";
 import { Divider } from "react-native-paper";
 
 import ProductPreview from "../ProductPreview";
 import { ProductProps } from "../../interfaces/products/product.interface";
 import { getProductsInSection } from "../../services/products.service";
+import CustomLoading from "../CustomLoading";
 
 export default function ProductSuggestions(product: ProductProps) {
   // --------------------
@@ -31,13 +26,8 @@ export default function ProductSuggestions(product: ProductProps) {
     getProducts();
   }, [product.section_id]);
 
-  if (localLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+  if (localLoading) return <CustomLoading />;
+
   // -------------------
 
   return (

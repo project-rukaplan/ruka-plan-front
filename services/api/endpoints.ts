@@ -17,8 +17,11 @@ export const endpoints = {
   projects: {
     with_products: "/projects/with-products",
     update_product_quantity: "/products/projects/update-quantity",
+    create_project: "/projects/create",
+    add_product: "/projects/join-product",
   },
   products: {
-    by_section: "/products/by-section"
+    by_section: "/products/by-section",
+    by_id: "/products/by-id",
   }
 };

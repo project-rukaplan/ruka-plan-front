@@ -1,21 +1,23 @@
 import RatingsSection from "@/components/CustomRatingGroup/RatingsSectionView";
 import { Divider } from "react-native-paper";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Dimensions } from "react-native";
 
 import { formatPrice } from "../../../utils/formatters/formatPrice";
 import { ProductProps } from "../../../interfaces/products/product.interface";
+import { CustomDivComponentProps } from "../../../types/components/custom-div-component.type";
 
-export default function ProductDataView(product: ProductProps) {
+export default function ProductDataView(
+  props: CustomDivComponentProps<ProductProps>,
+) {
   return (
-    <div style={styles.container}>
-      <Text style={styles.title}>{product.product_name}</Text>
-      <Text style={{ fontSize: 20 }}>Nombre proveedor</Text>
+    <div {...props} style={{ ...styles.container, ...props.style }}>
+      <Text style={styles.title}>{props.product_name}</Text>
+      <Text style={{ fontSize: 20 }}>{props.provider_name}</Text>
       <Divider />
-      {/* Change this product to the one fetched in the API */}
-      <RatingsSection product={product} />
+      <RatingsSection {...props} />
       <Divider />
-      <Text style={{ fontSize: 30 }}>
-        Precio unitario: {formatPrice(product.product_price)}
+      <Text style={{ fontSize: 20 }}>
+        Precio unitario: {formatPrice(props.product_price)}
       </Text>
     </div>
   );
@@ -26,14 +28,23 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignContent: "center",
-    margin: 50,
-    gap: 20,
+    gap: 15,
+    maxWidth: "100%",
+    flex: 1,
   },
   title: {
-    fontSize: 30,
+    fontSize: Math.min(30, Dimensions.get("window").width * 0.06),
     fontWeight: "bold",
     color: "#5b3e31",
     textAlign: "left",
-    marginTop: 50,
+    marginTop: "4%",
+  },
+  subtitle: {
+    fontSize: Math.min(20, Dimensions.get("window").width * 0.04),
+    textAlign: "left",
+  },
+  price: {
+    fontSize: Math.min(20, Dimensions.get("window").width * 0.04),
+    textAlign: "left",
   },
 });

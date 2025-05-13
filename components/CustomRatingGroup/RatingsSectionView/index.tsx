@@ -1,29 +1,52 @@
-import { Divider } from "@rneui/themed";
+import { StyleSheet, Dimensions } from "react-native";
+
 import { ProductProps } from "../../../interfaces/products/product.interface";
 import CustomRatingGroup from "..";
+import { CustomDivComponentProps } from "../../../types/components/custom-div-component.type";
 
-export default function RatingsSection({ product }: { product: ProductProps }) {
+export default function RatingsSection(
+  props: CustomDivComponentProps<ProductProps>,
+) {
   return (
     <div
+      {...props}
       style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-around",
+        ...styles.container,
+        ...props.style,
       }}
     >
       <CustomRatingGroup
-        cost={product.product_cost_rating!}
-        quality={product.product_quality_rating!}
-        shipment={product.product_shipment_rating!}
+        cost={props.product_cost_rating!}
+        quality={props.product_quality_rating!}
+        shipment={props.product_shipment_rating!}
         label="Reseñas del producto"
       />
-      <Divider orientation="vertical" />
       <CustomRatingGroup
-        cost={product.provider_cost_rating!}
-        quality={product.provider_quality_rating!}
-        shipment={product.provider_shipment_rating!}
+        cost={props.provider_cost_rating!}
+        quality={props.provider_quality_rating!}
+        shipment={props.provider_shipment_rating!}
         label="Reseñas del proveedor"
       />
     </div>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+    gap: "3%",
+    padding: "2%",
+    minHeight: 100,
+  },
+  ratingGroup: {
+    flex: 1,
+    minWidth: 250,
+    maxWidth: "45%",
+  },
+  divider: {
+    display: Dimensions.get("window").width >= 768 ? "flex" : "none",
+  },
+});

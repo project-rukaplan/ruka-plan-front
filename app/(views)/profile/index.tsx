@@ -4,6 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import ProjectGroupPreview from "@/components/ProjectGroupPreview";
 import { UseStore } from "../../../context";
+import CreateProjectButton from "@/components/ProjectGroupPreview/CreateProjectButton";
 
 export default function ProfileScreen() {
   const { store } = UseStore();
@@ -34,6 +35,9 @@ export default function ProfileScreen() {
 
         <SafeAreaView style={styles.projects_section_background}>
           <View style={styles.projects_container}>
+            <div>
+              <CreateProjectButton style={{ marginBottom: 30 }} />
+            </div>
             <Text
               style={{ fontSize: 37, marginBottom: 60, fontWeight: "bold" }}
             >

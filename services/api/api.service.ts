@@ -54,6 +54,28 @@ export default class ApiHandler {
     }
   }
 
+  public async post({ endpoint, body }: RequestBody) {
+    try {
+      const url: URL = new URL(this.getApiURL() + endpoint);
+      const headers: Headers = this.getHeaders();
+
+      const requestSettings: RequestInit = {
+        method: HttpMethods.POST as string,
+        body: JSON.stringify(body),
+        headers,
+      };
+
+      const response: any = await this.fetchRequest(
+        url.toString(),
+        requestSettings,
+      );
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   private getApiURL(): string {
     try {
       const currentEnv: string = process.env.EXPO_PUBLIC_ENV ?? "test";

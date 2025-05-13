@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import ProductPreview from "@/components/ProductPreview";
 import { getProductsInSection } from "../../services/products.service";
 import { ProductProps } from "../../interfaces/products/product.interface";
+import CustomLoading from "../CustomLoading";
 
 export default function ProductsInSectionView({
   section_id,
@@ -26,13 +27,7 @@ export default function ProductsInSectionView({
     getProducts();
   }, [section_id]);
 
-  if (localLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+  if (localLoading) return <CustomLoading />;
 
   return (
     <View style={styles.container}>

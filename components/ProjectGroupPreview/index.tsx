@@ -1,38 +1,31 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { UseStore } from "../../context";
 import ProjectPreview from "../ProjectPreview";
-import { ProjectProps } from "../ProjectPreview/interfaces";
+import { ProjectProps } from "../../interfaces/projects/projects.interface";
+import CustomLoading from "../CustomLoading";
 
 export default function ProjectGroupPreview({
   orientation = "vertical",
 }: {
   orientation?: "vertical" | "horizontal";
 }) {
-  const { store, reloadUserProjects } = UseStore();
+  const { store } = UseStore();
 
   const styles = StyleSheet.create({
     container: {
       display: "flex",
       flexDirection: orientation === "vertical" ? "column" : "row",
+      gap: 10,
     },
   });
 
-  if (store.loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+  if (store.loading) return <CustomLoading />;
 
   return (
     <div style={styles.container}>
       {store.user_projects.map((project: ProjectProps) => (
-        <ProjectPreview
-          key={project.project_id}
-          {...project}
-        />
+        <ProjectPreview key={project.project_id} {...project} />
       ))}
     </div>
   );

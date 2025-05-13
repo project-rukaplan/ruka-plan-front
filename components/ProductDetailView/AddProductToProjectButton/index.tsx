@@ -6,24 +6,35 @@ import { Picker } from "@react-native-picker/picker";
 import { ProductProps } from "../../../interfaces/products/product.interface";
 import { formatPrice } from "../../../utils/formatters/formatPrice";
 import { UseStore } from "../../../context";
+import { CustomDivComponentProps } from "../../../types/components/custom-div-component.type";
+import { ButtonStyles } from "../../../styles/button.styles";
+import { addProductToProject } from "../../../services/projects.service";
+import { StoreActions } from "../../../context/types";
 
-export default function AddProductToProjectButton(product: ProductProps) {
+export default function AddProductToProjectButton(
+  props: CustomDivComponentProps<ProductProps>,
+) {
   const [visible, setVisible] = useState(false);
   const [quantity, setQuantity] = useState<number>(0);
-  const { store, reloadUserProjects } = UseStore();
+  const [selectedProjectId, setSelectedProjectId] = useState<number>();
+  const { store, dispatch, reloadUserProjects } = UseStore();
 
   const toggleOverlay = () => {
     setVisible(!visible);
   };
 
-  const addProductToProject = async () => {
-    // TODO: Fetch the update of the project with the new product
-    toggleOverlay();
-    reloadUserProjects();
+  const executeAddProduct = async () => {
+    if (selectedProjectId) {
+      dispatch({ type: StoreActions.UPDATE_LOADING, payload: true });
+      addProductToProject(props.product_id, selectedProjectId!, quantity);
+      reloadUserProjects();
+      dispatch({ type: StoreActions.UPDATE_LOADING, payload: false });
+      toggleOverlay();
+    }
   };
 
   return (
-    <div style={{ margin: 20, marginTop: -10 }}>
+    <div {...props} style={{ margin: 20, ...props.style }}>
       <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
         <View style={{ ...styles.container, width: 600 }}>
           <div style={styles.titleContainer}>
@@ -41,7 +52,11 @@ export default function AddProductToProjectButton(product: ProductProps) {
               <Text style={{ fontSize: 20, marginBottom: 10 }}>
                 Selecciona un proyecto:
               </Text>
-              <Picker>
+              <Picker
+                onValueChange={(itemValue: number) => {
+                  setSelectedProjectId(itemValue);
+                }}
+              >
                 {store.user_projects.map((project) => (
                   <Picker.Item
                     key={project.project_id}
@@ -68,13 +83,13 @@ export default function AddProductToProjectButton(product: ProductProps) {
           <div style={styles.container}>
             <Text style={{ fontSize: 20, marginBottom: 10 }}>
               Costo total en el proyecto:{" "}
-              {formatPrice(product.product_price * quantity)}
+              {formatPrice(props.product_price * quantity)}
             </Text>
           </div>
           <Button
             title={"Agregar"}
-            buttonStyle={styles.button}
-            onPress={addProductToProject}
+            buttonStyle={ButtonStyles.primaryButton}
+            onPress={executeAddProduct}
           />
         </View>
       </Overlay>
@@ -83,7 +98,7 @@ export default function AddProductToProjectButton(product: ProductProps) {
         color="#b3c18c"
         accessibilityLabel="Agregar a proyecto"
         onPress={toggleOverlay}
-        buttonStyle={styles.button}
+        buttonStyle={ButtonStyles.primaryButton}
       />
     </div>
   );
@@ -93,26 +108,19 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    gap: 10,
+    gap: 5,
     margin: 10,
     padding: 10,
   },
   title: {
     fontSize: 20,
-    color: "white",
+    color: "black",
   },
   titleContainer: {
     borderRadius: 30,
     backgroundColor: "#b99470",
     padding: 10,
     textAlign: "center",
-    color: "white",
-  },
-  button: {
-    backgroundColor: "#b3c18c",
-    borderRadius: 30,
-    padding: 10,
-    textAlign: "center",
-    color: "white",
+    color: "black",
   },
 });

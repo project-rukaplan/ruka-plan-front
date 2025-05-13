@@ -1,16 +1,18 @@
 import React from "react";
 import { AirbnbRating } from "@rneui/themed";
 import { StyleSheet, Text } from "react-native";
+import { CustomDivComponentProps } from "../../../types/components/custom-div-component.type";
 
 export default function CustomRating({
   value,
   label,
-}: {
+  ...props
+}: CustomDivComponentProps<{
   value: number;
   label: string;
-}) {
+}>) {
   return (
-    <div style={styles.container}>
+    <div {...props} style={{ ...styles.container, ...props.style }}>
       <Text style={styles.label}>{label}:</Text>
       <AirbnbRating
         defaultRating={value}
