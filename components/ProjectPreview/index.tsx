@@ -1,57 +1,80 @@
-import { StyleSheet } from "react-native";
-import { ProjectProps } from "./interfaces";
+import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
+
+import { ProjectProps } from "../../interfaces/projects/projects.interface";
 import { ProductProjectProps } from "../../interfaces/products/product-project.interface";
-import ProductProjectView from "./ProductProjectView.tsx";
+import { formatPrice } from "../../utils/formatters/formatPrice";
 
 export default function ProjectPreview({
   project_name,
   products,
   project_id,
-  reloadProject,
-}: ProjectProps & { reloadProject: () => void }) {
+  project_description,
+}: ProjectProps) {
+  const [projectTotalCost, setProjectTotalCost] = useState<number>(0);
+  const router = useRouter();
+
+  const calculateTotalCost = () => {
+    const totalCost = products.reduce(
+      (acc: number, product: ProductProjectProps) =>
+        acc + product.product_price * product.quantity,
+      0,
+    );
+    setProjectTotalCost(totalCost);
+  };
+
+  useEffect(() => {
+    calculateTotalCost();
+  }, [products]);
+
+  const navigateToProjectDetail = () => {
+    router.navigate(`/(views)/projects/${project_id}`);
+  };
+
   return (
-    <div style={wrapperStyle}>
-      <div style={styles.container}>
-        <p style={styles.projectHeaderContainer}>{project_name}</p>
-        {products.map((product: ProductProjectProps) => (
-          <ProductProjectView
-            key={product.product_id}
-            project_id={project_id}
-            product={product}
-            reloadProject={reloadProject}
-          />
-        ))}
-      </div>
-    </div>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={navigateToProjectDetail}
+    >
+      <Text style={styles.headerContainer}>{project_name}</Text>
+      <Text style={styles.subtitleContainer}>{project_description}</Text>
+      <Text
+        style={{ ...styles.headerContainer, backgroundColor: "transparent" }}
+      >
+        Costo Total: {formatPrice(projectTotalCost)}
+      </Text>
+    </TouchableOpacity>
   );
 }
 
-const wrapperStyle = {
-  border: "5px solid #B99470", 
-  borderRadius: "20px",
-  padding: "10px",
-  margin: "15px",
-};
-
-
-const styles = {
+const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
-    borderWidth: 2,
-
-  },
-  projectHeaderContainer: {
-    backgroundColor: "#b4c18d",
-    marginLeft: 20,
-    marginRight: 20,
+    backgroundColor: "#d0d3c9",
     borderRadius: 15,
-    height: 50,
+    margin: 10,
+  },
+  headerContainer: {
+    backgroundColor: "#b4c18d",
+    fontWeight: "bold",
+    margin: 30,
+    borderRadius: 15,
     textAlign: "center",
-    padding: 40,
-    lineHeight: "50px", 
-    fontSize: "27px",
-    fontWeight: "bold", 
-    fontColor: "#FFFFFF",
-},
-}
+    padding: 15,
+    fontSize: 20,
+  },
+  subtitleContainer: {
+    backgroundColor: "transparent",
+    fontWeight: "500",
+    marginHorizontal: 30,
+    marginTop: -15,
+    marginBottom: 15,
+    textAlign: "center",
+    padding: 10,
+    fontSize: 16,
+    color: "#4a4a4a",
+    fontStyle: "italic",
+  },
+});

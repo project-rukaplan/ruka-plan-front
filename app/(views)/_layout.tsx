@@ -27,7 +27,7 @@ export default function ViewsLayout() {
           tabBarItemStyle: {
             flex: 1,
             alignItems: "flex-start",
-            paddingLeft: 2, 
+            paddingLeft: 2,
           },
         }}
       />
@@ -39,25 +39,20 @@ export default function ViewsLayout() {
           tabBarItemStyle: {
             flex: 1,
             alignItems: "flex-start",
-            paddingLeft: 2 
+            paddingLeft: 2,
           },
         }}
       />
       <Tabs.Screen
-        name={"shopping-cart/index"}
+        name="products/[id]"
         options={{
-          title: "",
-          tabBarIcon: () => (
-            <Image 
-              source={require("../../assets/images/carrito.png")} 
-              style={{ width: 30, height: 30, marginRight: 20 }} 
-            />
-          ),
-          tabBarItemStyle: {
-            flex: 0.5,
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-          },
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="projects/[id]"
+        options={{
+          href: null,
         }}
       />
     </Tabs>

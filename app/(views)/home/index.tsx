@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable import/no-unresolved */
 import { useEffect, useState } from "react";
 import {
   SafeAreaView,
@@ -9,14 +7,15 @@ import {
   View,
   Image,
   Text,
-  ActivityIndicator,
 } from "react-native";
+
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { UseStore } from "../../../context";
 import { StoreActions } from "../../../context/types";
 import { getAllSections } from "../../../services/sections.service";
 import { SectionProps } from "../../../interfaces/sections/section.interface";
 import ProductsInSectionView from "@/components/ProductsInSectionView";
+import CustomLoading from "@/components/CustomLoading";
 
 export default function HomeScreen() {
   const [searchText, setSearchText] = useState<string>();
@@ -59,13 +58,7 @@ export default function HomeScreen() {
     getSections();
   }, []);
 
-  if (store.loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center",}}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
+  if (store.loading) return <CustomLoading />;
 
   return (
     <SafeAreaProvider>
