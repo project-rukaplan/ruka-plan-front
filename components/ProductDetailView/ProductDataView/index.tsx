@@ -12,7 +12,9 @@ export default function ProductDataView(
   return (
     <div {...props} style={{ ...styles.container, ...props.style }}>
       <Text style={styles.title}>{props.product_name}</Text>
-      <Text style={{ fontSize: 20 }}>{props.provider_name}</Text>
+      <Text style={{ fontSize: 20 }}>
+        {props.provider_name} - {props.provider_address}
+      </Text>
       <Divider />
       <RatingsSection {...props} />
       <Divider />
